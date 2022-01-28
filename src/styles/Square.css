@@ -1,5 +1,6 @@
 .Square{
     filter: brightness(2);
+    background-color: rgb(51, 160, 30);
     width: 100px;
     height: 100px;
 }

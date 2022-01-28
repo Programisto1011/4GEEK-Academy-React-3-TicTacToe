@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import "../styles/Main.css";
 
 //import your own components
-import Home from "./view/Main.jsx";
+import Main from "./view/Main.jsx";
 
 //render your react application
-ReactDOM.render(<Home />, document.querySelector("#app"));
+ReactDOM.render(<Main />, document.querySelector("#app"));

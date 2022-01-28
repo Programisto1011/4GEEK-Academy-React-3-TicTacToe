@@ -1,25 +1,25 @@
 import React, { useState } from "react";
-import Square from './Squarejsx';
+import * as PropTypes from "prop-types";
 // include your styles into the webpack bundle
 import "../../styles/Board.css";
+import Square from "./Square.jsx";
 
 //create your first component
 const Board = (props) => {
-	const [selectedColor, setSelectedColor] = useState("");
+	// const [selectedColor, setSelectedColor] = useState("");
 	//Objeto para almacenar el estado ("", "red", "blue") y la posición
-	}
 
 	return (
 		<>
-			<Square />
+			<Square x={props.x} y={props.y} turn={props.turn} />
 		</>
 	);
+};
 
-
-Square.propTypes = {
-    x: PropTypes.number,
-	y: PropTypes.number,
-	turn: PropTypes.number,
+Board.propTypes = {
+	x: PropTypes.string,
+	y: PropTypes.string,
+	turn: PropTypes.string,
 };
 
 export default Board;

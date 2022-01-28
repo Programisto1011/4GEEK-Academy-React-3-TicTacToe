@@ -1,5 +1,5 @@
 import React from "react";
-import Square from "../component/Square.jsx";
+import Board from "../component/Board.jsx";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
@@ -7,9 +7,9 @@ import rigoImage from "../../img/rigo-baby.jpg";
 //create your first component
 const Main = () => {
 	return (
-		<div>
-			<Square />
-		</div>
+		<>
+			<Board x="0" y="0" turn="0" />
+		</>
 	);
 };
 

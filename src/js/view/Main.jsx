@@ -5,7 +5,7 @@ import Board from "../component/Board.jsx";
 const Main = () => {
 	return (
 		<>
-			<Board x="0" y="0" turn="2" />
+			<Board />
 		</>
 	);
 };

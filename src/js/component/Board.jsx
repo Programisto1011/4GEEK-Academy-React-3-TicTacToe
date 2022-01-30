@@ -4,23 +4,30 @@ import * as PropTypes from "prop-types";
 import "../../styles/Board.css";
 import Square from "./Square.jsx";
 
+// // function SquareObject(x, y) {
+// // 	this.state = ""; //"", "red", "blue"
+// // 	this.position = [x, y];
+// // }
+
 //create your first component
-const Board = (props) => {
-	// const [selectedColor, setSelectedColor] = useState("");
-	//Objeto para almacenar el estado ("", "red", "blue") y la posición
+const Board = () => {
+	const [turn, setCount] = useState(0);
+	// Objeto para almacenar el estado ("", "red", "blue") y la posición
+	// ¿¿?? Como contamos los turnos <--------------------------------------
+	const incrementTurn = (ev) => {
+		setCount(turn + 1);
+		console.log(turn);
+	};
 
 	return (
 		<>
-			<Square x={props.x} y={props.y} turn={props.turn} />
+			<Square turn={turn} handleClick={incrementTurn} />
+			<Square turn={turn} handleClick={incrementTurn} />
 		</>
 	);
 };
 
-Board.propTypes = {
-	x: PropTypes.string,
-	y: PropTypes.string,
-	turn: PropTypes.string,
-};
+Board.propTypes = {};
 
 export default Board;
 // Como escalariamos las cajas en funcion del número de cajas?

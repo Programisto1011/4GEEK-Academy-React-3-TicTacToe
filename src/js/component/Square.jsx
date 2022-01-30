@@ -5,24 +5,24 @@ import "../../styles/Square.css";
 
 //create your first component
 const Square = (props) => {
-	var color = "";
+	const [color, setcolor] = useState("");
 	const handleClick = (ev) => {
 		props.handleClick(ev);
 		setisActive(true);
+		setcolor(props.turn % 2 == 0 ? "red" : "blue");
 	};
 
 	console.log(props.turn);
 	console.log(isActive);
 
-	color = props.turn % 2 == 0 ? "red" : "blue";
 	console.log(color);
 	const [isActive, setisActive] = useState(false);
 
 	return (
 		<>
 			<button
+				className={`Square ${color}`}
 				onClick={handleClick}
-				className={`Square ${isActive ? color : ""}`}
 				disabled={isActive}></button>
 			<h1>Class Color: {props.color}</h1>
 		</>

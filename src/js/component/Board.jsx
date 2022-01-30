@@ -23,6 +23,7 @@ const Board = () => {
 		<>
 			<Square turn={turn} handleClick={incrementTurn} />
 			<Square turn={turn} handleClick={incrementTurn} />
+			<Square turn={turn} handleClick={incrementTurn} />
 		</>
 	);
 };

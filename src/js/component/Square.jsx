@@ -7,9 +7,9 @@ import "../../styles/Square.css";
 const Square = (props) => {
 	const [color, setcolor] = useState("");
 	const handleClick = (ev) => {
-		props.handleClick(ev);
 		setisActive(true);
 		setcolor(props.turn % 2 == 0 ? "red" : "blue");
+		props.handleClick(ev);
 	};
 
 	console.log(props.turn);
@@ -22,7 +22,7 @@ const Square = (props) => {
 		<>
 			<button
 				id={`${props.x}_${props.y}`} //Id identificador de la posición
-				className={`Square ${color}`}
+				className={`Square ${color}`} //Class con el color de la casilla
 				onClick={handleClick}
 				disabled={isActive}></button>
 			<h1>Class Color: {props.color}</h1>

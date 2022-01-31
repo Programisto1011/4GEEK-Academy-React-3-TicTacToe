@@ -47,27 +47,31 @@ const Board = () => {
 		//Evalua si el jugador a ganado
 		//SOLUCION 1: [A][...]
 
+		//Dividir el array en filas
+
+		//Todos los elementos del array son iguales
+		const allEqual = (arr, iRow) => {
+			var rArr = arr[iRow];
+			return rArr.every((val) => val === rArr[0]);
+		};
 		//Esta función necesita array de 1
 		const isAnyRowComplete = (arr) => {
-			var isFinishedGame = 1;
-			for (let row of arr) {
-				for (let column of arr) {
-					let index_r = parseInt(row);
-					let index_c = parseInt(column);
-					isFinishedGame *= arr[index_r][index_c];
-					console.log(`Test: ${index_r}`);
+			for (let row in arr) {
+				const index_row = parseInt(row);
+				if (allEqual(arr, index_row)) {
+					return true;
 				}
-				return isFinishedGame === 1 ? true : false;
 			}
+			return false;
 		};
 
 		const test_arr = [
-			[1, 1, 1],
-			[1, 0, 0],
-			[0, 0, 0],
+			[1, 0, 1],
+			[1, 0, 1],
+			[1, 0, 1],
 		];
 
-		console.log(`Test funcion solución${isAnyRowComplete(test_arr)}`);
+		console.log(`Test ultimo: ${isAnyRowComplete(test_arr)}`);
 
 		// }
 
@@ -165,4 +169,3 @@ const Board = () => {
 Board.propTypes = {};
 
 export default Board;
-// Como escalariamos las cajas en funcion del número de cajas?

@@ -12,9 +12,6 @@ const Square = (props) => {
 		props.handleClick(ev);
 	};
 
-	console.log(props.turn);
-	console.log(isActive);
-
 	console.log(color);
 	const [isActive, setisActive] = useState(false);
 

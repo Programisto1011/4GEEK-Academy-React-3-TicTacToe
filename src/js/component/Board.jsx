@@ -13,12 +13,14 @@ const existStringInText = (text, word) => {
 	return !(text.search(word) === -1);
 };
 
+const arr_states = [
+	[0, 0, 0],
+	[0, 0, 0],
+];
+
 const Board = () => {
 	//Objeto para almacenar los estados de los botones (o, red, blue)
-	var arr_states = [
-		[0, 0, 0],
-		[0, 0, 0],
-	];
+
 	//Variable que almacena el turno
 	const [turn, setCount] = useState(0);
 
@@ -35,7 +37,7 @@ const Board = () => {
 		var y_position = position_arr[1];
 		console.log(`Position array: ${position_arr}`);
 		//class del botón
-		const iClassName = ev.target.className;
+		const iClassName = ev.target.className; //<----------------------------
 		console.log(`Clase: ${iClassName}`);
 		//Extraer color de la clase
 		const color = existStringInText(iClassName, "blue") ? "blue" : "red";
@@ -47,7 +49,7 @@ const Board = () => {
 
 	//Problema 1: Se extrae la clase antes de que se haya modificado
 	//Problema 2: No permanecen los cambios entre clicks
-
+	//<button id=
 	return (
 		<>
 			<Square turn={turn} x="0" y="0" handleClick={incrementTurn} />

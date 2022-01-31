@@ -12,8 +12,9 @@ const transformStringToArrByDelimiter = (id, delimiter) => {
 const existStringInText = (text, word) => {
 	return !(text.search(word) === -1);
 };
-
+//-------------------------------------------------------------------------------------------------
 const arr_states = [
+	[0, 0, 0],
 	[0, 0, 0],
 	[0, 0, 0],
 ];
@@ -36,26 +37,127 @@ const Board = () => {
 		var x_position = position_arr[0];
 		var y_position = position_arr[1];
 		console.log(`Position: ${position_arr}`);
-		//class del botón
-		const iClassName = ev.target.className; //<----------------------------
-		console.log(`Clase: ${iClassName}`);
-		//Extraer color de la clase
-		console.log(`Color: ${color}`);
-		//---------------------------------------------------------------------
+		//color a asignar al botón
 		const color = turn % 2 == 0 ? "red" : "blue";
+		//Añadir color a la class del botón
 		ev.target.classList.add(color);
-		//Modificar array de estados
+		//Modificar y de estados
 		arr_states[x_position][y_position] = color;
 		console.log(`Estado del juego: ${arr_states}`);
+		//Evalua si el jugador a ganado
+		//SOLUCION 1: [A][...]
+
+		//Esta función necesita array de 1
+		const isAnyRowComplete = (arr) => {
+			var isFinishedGame = 1;
+			for (let row of arr) {
+				for (let column of arr) {
+					let index_r = parseInt(row);
+					let index_c = parseInt(column);
+					isFinishedGame *= arr[index_r][index_c];
+					console.log(`Test: ${index_r}`);
+				}
+				return isFinishedGame === 1 ? true : false;
+			}
+		};
+
+		const test_arr = [
+			[1, 1, 1],
+			[1, 0, 0],
+			[0, 0, 0],
+		];
+
+		console.log(`Test funcion solución${isAnyRowComplete(test_arr)}`);
+
+		// }
+
+		// function getCol(matrix, col) {
+		// 	var column = [];
+		// 	for (var i in matrix) {
+		// 		column.push(matrix[i][col]);
+		// 	}
+		// 	return column;
+		// }
+
+		//SOLUCION 2: [...][B]
+		//SOLUCIÓN 3: [A][A]
+
+		//1.1 - Preparación del dataset
+		//Array
+		//const isFinishGame = arr_states[i].reduce(function(a, b){a === b});
+
+		// const matchElementsRow = arr =>{
+		//
 	};
+
+	//Alert de que jugador a ganado
 
 	//Problema 1: Se extrae la clase antes de que se haya modificado
 
 	return (
 		<>
-			<Square turn={turn} x="0" y="0" handleClick={incrementTurn} />
-			<Square turn={turn} x="0" y="1" handleClick={incrementTurn} />
-			<Square turn={turn} x="0" y="2" handleClick={incrementTurn} />
+			<div class="contanier">
+				<div class="row">
+					<Square
+						turn={turn}
+						x="0"
+						y="0"
+						handleClick={incrementTurn}
+					/>
+					<Square
+						turn={turn}
+						x="0"
+						y="1"
+						handleClick={incrementTurn}
+					/>
+					<Square
+						turn={turn}
+						x="0"
+						y="2"
+						handleClick={incrementTurn}
+					/>
+				</div>
+				<div class="row">
+					<Square
+						turn={turn}
+						x="1"
+						y="0"
+						handleClick={incrementTurn}
+					/>
+					<Square
+						turn={turn}
+						x="1"
+						y="1"
+						handleClick={incrementTurn}
+					/>
+					<Square
+						turn={turn}
+						x="1"
+						y="2"
+						handleClick={incrementTurn}
+					/>
+				</div>
+				<div class="row">
+					<Square
+						turn={turn}
+						x="2"
+						y="0"
+						handleClick={incrementTurn}
+					/>
+					<Square
+						turn={turn}
+						x="2"
+						y="1"
+						handleClick={incrementTurn}
+					/>
+					<Square
+						turn={turn}
+						x="2"
+						y="2"
+						handleClick={incrementTurn}
+					/>
+				</div>
+			</div>
 		</>
 	);
 };

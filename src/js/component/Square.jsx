@@ -5,30 +5,25 @@ import "../../styles/Square.css";
 
 //create your first component
 const Square = (props) => {
-	const [color, setcolor] = useState("");
 	const handleClick = (ev) => {
 		setisActive(true);
-		setcolor(props.turn % 2 == 0 ? "red" : "blue");
 		props.handleClick(ev);
 	};
 
-	console.log(color);
 	const [isActive, setisActive] = useState(false);
 
 	return (
 		<>
 			<button
 				id={`${props.x}_${props.y}`} //Id identificador de la posición
-				className={`Square ${color}`} //Class con el color de la casilla
+				className="Square "
 				onClick={handleClick}
 				disabled={isActive}></button>
-			<h1>Class Color: {props.color}</h1>
 		</>
 	);
 };
 
 Square.propTypes = {
-	turn: PropTypes.number.isRequired,
 	x: PropTypes.string.isRequired,
 	y: PropTypes.string.isRequired,
 };

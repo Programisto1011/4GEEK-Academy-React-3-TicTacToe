@@ -35,21 +35,22 @@ const Board = () => {
 		const position_arr = transformStringToArrByDelimiter(id, "_");
 		var x_position = position_arr[0];
 		var y_position = position_arr[1];
-		console.log(`Position array: ${position_arr}`);
+		console.log(`Position: ${position_arr}`);
 		//class del botón
 		const iClassName = ev.target.className; //<----------------------------
 		console.log(`Clase: ${iClassName}`);
 		//Extraer color de la clase
-		const color = existStringInText(iClassName, "blue") ? "blue" : "red";
 		console.log(`Color: ${color}`);
+		//---------------------------------------------------------------------
+		const color = turn % 2 == 0 ? "red" : "blue";
+		ev.target.classList.add(color);
 		//Modificar array de estados
 		arr_states[x_position][y_position] = color;
 		console.log(`Estado del juego: ${arr_states}`);
 	};
 
 	//Problema 1: Se extrae la clase antes de que se haya modificado
-	//Problema 2: No permanecen los cambios entre clicks
-	//<button id=
+
 	return (
 		<>
 			<Square turn={turn} x="0" y="0" handleClick={incrementTurn} />

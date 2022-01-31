@@ -45,16 +45,13 @@ const Board = () => {
 		arr_states[x_position][y_position] = color;
 		console.log(`Estado del juego: ${arr_states}`);
 		//Evalua si el jugador a ganado
-		//SOLUCION 1: [A][...]
-
-		//Dividir el array en filas
 
 		//Todos los elementos del array son iguales
 		const allEqual = (arr, iRow) => {
 			var rArr = arr[iRow];
 			return rArr.every((val) => val === rArr[0]);
 		};
-		//Esta función necesita array de 1
+		//CASO 1: Comprobación de filas [A][...]
 		const isAnyRowComplete = (arr) => {
 			for (let row in arr) {
 				const index_row = parseInt(row);
@@ -65,33 +62,32 @@ const Board = () => {
 			return false;
 		};
 
+		//CASO 2: Comprobacion de columnas [...][B]
+		//Tranponer array
+		const trasposeArray = (matrix) => {
+			let arr = [];
+			for (let i = 0; i < matrix.length; i++) {
+				arr.push([]);
+				for (let j = 0; j < matrix.length; j++) {
+					arr[i].push(matrix[j][i]);
+				}
+			}
+			return arr;
+		};
+
 		const test_arr = [
-			[1, 0, 1],
-			[1, 0, 1],
-			[1, 0, 1],
+			[2, 2, 2],
+			[3, 0, 2],
+			[4, 2, 2],
 		];
 
-		console.log(`Test ultimo: ${isAnyRowComplete(test_arr)}`);
+		const testRows = isAnyRowComplete(test_arr);
+		console.log(`Test Filas: ${testRows}`);
+		const copy_arr = test_arr.slice();
+		const testColumns = isAnyRowComplete(trasposeArray(copy_arr));
+		console.log(`Test Columnas: ${testColumns}`);
 
-		// }
-
-		// function getCol(matrix, col) {
-		// 	var column = [];
-		// 	for (var i in matrix) {
-		// 		column.push(matrix[i][col]);
-		// 	}
-		// 	return column;
-		// }
-
-		//SOLUCION 2: [...][B]
-		//SOLUCIÓN 3: [A][A]
-
-		//1.1 - Preparación del dataset
-		//Array
-		//const isFinishGame = arr_states[i].reduce(function(a, b){a === b});
-
-		// const matchElementsRow = arr =>{
-		//
+		//CASO 3: La diagonal es igual
 	};
 
 	//Alert de que jugador a ganado

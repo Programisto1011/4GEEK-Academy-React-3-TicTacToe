@@ -21,6 +21,7 @@ const Square = (props) => {
 	return (
 		<>
 			<button
+				id={`${props.x}_${props.y}`} //Id identificador de la posición
 				className={`Square ${color}`}
 				onClick={handleClick}
 				disabled={isActive}></button>
@@ -31,6 +32,8 @@ const Square = (props) => {
 
 Square.propTypes = {
 	turn: PropTypes.number.isRequired,
+	x: PropTypes.string.isRequired,
+	y: PropTypes.string.isRequired,
 };
 
 export default Square;

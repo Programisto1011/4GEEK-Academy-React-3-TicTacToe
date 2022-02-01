@@ -180,13 +180,12 @@ const Board = () => {
 				isCompletePrincipalDiagonal(arr) ||
 				isCompleteSecondaryDiagonal(arr)
 			) {
-				//Alerta de que jugador ha ganado
+				//Alerta de que jugador ha ganado y recarga pagina
 				alert(`El jugador ${color} ha ganado!!!`);
-				window.onload = load;
+				window.location.reload(true);
 			}
 		};
-		Win = IsFinishGame(arr_states); //<------------NECESITO SACAR ESTE DATO A OTRO COMPONENTE
-		console.log(`Ha ganado: ${Win}`);
+		Win = IsFinishGame(arr_states);
 	};
 
 	return (
@@ -259,5 +258,4 @@ const Board = () => {
 
 Board.propTypes = {};
 
-export { Win };
 export default Board;

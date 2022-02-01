@@ -183,6 +183,7 @@ const Board = () => {
 				isCompletePrincipalDiagonal(arr) ||
 				isCompleteSecondaryDiagonal(arr)
 			) {
+				//Alerta de que jugador ha ganado
 				alert(`El jugador ${color} ha ganado!!!`);
 				return true;
 			}
@@ -190,14 +191,10 @@ const Board = () => {
 		IsFinishGame(arr_states);
 	};
 
-	//Alert de que jugador a ganado
-
-	//Problema 1: Se extrae la clase antes de que se haya modificado
-
 	return (
 		<>
-			<div class="contanier">
-				<div class="row">
+			<div className="contanier">
+				<div className="row">
 					<Square
 						turn={turn}
 						x="0"
@@ -217,7 +214,7 @@ const Board = () => {
 						handleClick={incrementTurn}
 					/>
 				</div>
-				<div class="row">
+				<div className="row">
 					<Square
 						turn={turn}
 						x="1"
@@ -237,7 +234,7 @@ const Board = () => {
 						handleClick={incrementTurn}
 					/>
 				</div>
-				<div class="row">
+				<div className="row">
 					<Square
 						turn={turn}
 						x="2"

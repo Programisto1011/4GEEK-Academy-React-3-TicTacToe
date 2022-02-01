@@ -46,16 +46,29 @@ const Board = () => {
 		console.log(`Estado del juego: ${arr_states}`);
 		//Evalua si el jugador a ganado
 
-		//Todos los elementos del array son iguales
-		const allEqual = (arr, iRow) => {
+		//Todos los elementos de una fila en un array son iguales al primero de la fila
+		const allEqualForRow = (arr, iRow) => {
 			var rArr = arr[iRow];
 			return rArr.every((val) => val === rArr[0]);
 		};
+		//Todos los elementos de una fila de un array están definidos
+		const allString = (arr, iRow) => {
+			var rArr = arr[iRow];
+			for (let value of rArr) {
+				if (typeof value !== "string") {
+					return false;
+				}
+			}
+			return true;
+		};
+
 		//CASO 1: Comprobación de filas [A][...]
 		const isAnyRowComplete = (arr) => {
 			for (let row in arr) {
-				const index_row = parseInt(row);
-				if (allEqual(arr, index_row)) {
+				const iRow = parseInt(row);
+				console.log(`Que contiene la matriz: ${typeof arr[row]}`);
+				if (allEqualForRow(arr, iRow) && allString(arr, iRow)) {
+					//<----------------
 					return true;
 				}
 			}
@@ -75,19 +88,78 @@ const Board = () => {
 			return arr;
 		};
 
+		const isAnyColumnComplete = (arr) => {
+			return isAnyRowComplete(trasposeArray(arr));
+		};
+
 		const test_arr = [
-			[2, 2, 2],
-			[3, 0, 2],
-			[4, 2, 2],
+			[0, 0, "blue"],
+			["blue", 0, 0],
+			["blue", "blue", "blue"],
 		];
+
+		console.log(`${test_arr[0]} - Todos string: ${allString(test_arr, 0)}`);
 
 		const testRows = isAnyRowComplete(test_arr);
 		console.log(`Test Filas: ${testRows}`);
 		const copy_arr = test_arr.slice();
-		const testColumns = isAnyRowComplete(trasposeArray(copy_arr));
+		const testColumns = isAnyColumnComplete(copy_arr);
 		console.log(`Test Columnas: ${testColumns}`);
 
 		//CASO 3: La diagonal es igual
+		//Preparando dataset
+		//Diagonal principal
+		const principalDiagonalArr = (arr) => {
+			const diagonalArr = [];
+			for (let i in arr) {
+				for (let j in arr) {
+					if (i === j) {
+						diagonalArr.push(arr[parseInt(i)][parseInt(j)]);
+						console.log(arr[parseInt(i)][parseInt(j)]);
+					}
+				}
+			}
+			return diagonalArr;
+		};
+		console.log(
+			`Diagonal principal array: ${principalDiagonalArr(arr_states)}`
+		);
+		//Comprobación diagonal principal
+		const isCompletePrincipalDiagonal = (arr) => {
+			return allEqualForRow(principalDiagonalArr(arr));
+		};
+
+		//Diagonal secundaria
+		const secondaryDiagonalArr = (arr) => {
+			const diagonalArr = [];
+			const dim = arr[0].length;
+			for (let i = 0, j = dim - 1; i < dim, j > -1; i++, j--) {
+				diagonalArr.push(arr[i][j]);
+			}
+
+			return diagonalArr;
+		};
+		console.log(
+			`Diagonal secondary array: ${secondaryDiagonalArr(arr_states)}`
+		);
+		//Comprobación diagonal secundaria
+		const isCompleteSecondaryDiagonal = (arr) => {
+			return allEqualForRow(secondaryDiagonalArr(arr));
+		};
+
+		//Evaluación de las comprobaciones
+		const IsFinishGame = (arr) => {
+			if (
+				isAnyRowComplete(arr) ||
+				isAnyColumnComplete(arr) ||
+				isCompletePrincipalDiagonal(arr) ||
+				isCompleteSecondaryDiagonal(arr)
+			) {
+				alert(`El jugador ${color} ha ganado!!!`);
+				return true;
+			}
+		};
+		IsFinishGame(arr_states);
 	};
 
 	//Alert de que jugador a ganado

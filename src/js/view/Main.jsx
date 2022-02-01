@@ -1,12 +1,13 @@
 import React from "react";
-import Board from "../component/Board.jsx";
 import IModal from "../component/Modal.jsx";
+import Board, { Win } from "../component/Board.jsx";
 
 //create your first component
 const Main = () => {
 	return (
 		<>
-			<IModal />
+			<IModal Win={Win} />
+			<h1>{Win}</h1>
 			<Board />
 		</>
 	);

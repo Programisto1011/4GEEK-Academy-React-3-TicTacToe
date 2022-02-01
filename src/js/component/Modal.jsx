@@ -5,11 +5,11 @@ import { Modal, Button } from "react-bootstrap";
 
 import "../../styles/Modal.css";
 
-function IModal() {
+function IModal(props) {
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const handleShow = () => setShow(props.Win);
 
 	return (
 		<>
@@ -17,12 +17,8 @@ function IModal() {
 				Launch static backdrop modal
 			</Button>
 
-			<Modal
-				show={show}
-				onHide={handleClose}
-				backdrop="static"
-				keyboard={false}>
-				<Modal.Header closeButton>
+			<Modal show={show} backdrop="static" keyboard={false}>
+				<Modal.Header>
 					<Modal.Title>Modal title</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>

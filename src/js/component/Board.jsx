@@ -9,9 +9,6 @@ import Square from "./Square.jsx";
 const transformStringToArrByDelimiter = (id, delimiter) => {
 	return id.split(delimiter);
 };
-const existStringInText = (text, word) => {
-	return !(text.search(word) === -1);
-};
 //-------------------------------------------------------------------------------------------------
 const arr_states = [
 	[0, 0, 0],
@@ -19,13 +16,15 @@ const arr_states = [
 	[0, 0, 0],
 ];
 
+var Win = false;
+
 const Board = () => {
 	//Objeto para almacenar los estados de los botones (o, red, blue)
 
 	//Variable que almacena el turno
 	const [turn, setCount] = useState(0);
 
-	const incrementTurn = (ev) => {
+	const Funcionality = (ev) => {
 		//Suma uno al turno cada vez que se de click a un botón
 		setCount(turn + 1);
 		console.log(`Turno :${turn}`);
@@ -44,7 +43,6 @@ const Board = () => {
 		//Modificar y de estados
 		arr_states[x_position][y_position] = color;
 		console.log(`Estado del juego: ${arr_states}`);
-
 		//Todos los elementos de una fila en un array son iguales al primero de la fila
 		const allEqualForRow = (arr, iRow) => {
 			//Input array nxn
@@ -83,7 +81,6 @@ const Board = () => {
 				const iRow = parseInt(row);
 				console.log(`Que contiene la matriz: ${typeof arr[row]}`);
 				if (allEqualForRow(arr, iRow) && allString(arr, iRow)) {
-					//<----------------
 					return true;
 				}
 			}
@@ -91,7 +88,7 @@ const Board = () => {
 		};
 
 		//CASO 2: Comprobacion de columnas [...][B]
-		//Tranponer array
+		//Trasponer array
 		const trasposeArray = (matrix) => {
 			let arr = [];
 			for (let i = 0; i < matrix.length; i++) {
@@ -185,10 +182,11 @@ const Board = () => {
 			) {
 				//Alerta de que jugador ha ganado
 				alert(`El jugador ${color} ha ganado!!!`);
-				return true;
+				window.onload = load;
 			}
 		};
-		IsFinishGame(arr_states);
+		Win = IsFinishGame(arr_states); //<------------NECESITO SACAR ESTE DATO A OTRO COMPONENTE
+		console.log(`Ha ganado: ${Win}`);
 	};
 
 	return (
@@ -199,19 +197,19 @@ const Board = () => {
 						turn={turn}
 						x="0"
 						y="0"
-						handleClick={incrementTurn}
+						handleClick={Funcionality}
 					/>
 					<Square
 						turn={turn}
 						x="0"
 						y="1"
-						handleClick={incrementTurn}
+						handleClick={Funcionality}
 					/>
 					<Square
 						turn={turn}
 						x="0"
 						y="2"
-						handleClick={incrementTurn}
+						handleClick={Funcionality}
 					/>
 				</div>
 				<div className="row">
@@ -219,19 +217,19 @@ const Board = () => {
 						turn={turn}
 						x="1"
 						y="0"
-						handleClick={incrementTurn}
+						handleClick={Funcionality}
 					/>
 					<Square
 						turn={turn}
 						x="1"
 						y="1"
-						handleClick={incrementTurn}
+						handleClick={Funcionality}
 					/>
 					<Square
 						turn={turn}
 						x="1"
 						y="2"
-						handleClick={incrementTurn}
+						handleClick={Funcionality}
 					/>
 				</div>
 				<div className="row">
@@ -239,19 +237,19 @@ const Board = () => {
 						turn={turn}
 						x="2"
 						y="0"
-						handleClick={incrementTurn}
+						handleClick={Funcionality}
 					/>
 					<Square
 						turn={turn}
 						x="2"
 						y="1"
-						handleClick={incrementTurn}
+						handleClick={Funcionality}
 					/>
 					<Square
 						turn={turn}
 						x="2"
 						y="2"
-						handleClick={incrementTurn}
+						handleClick={Funcionality}
 					/>
 				</div>
 			</div>
@@ -261,4 +259,5 @@ const Board = () => {
 
 Board.propTypes = {};
 
+export { Win };
 export default Board;

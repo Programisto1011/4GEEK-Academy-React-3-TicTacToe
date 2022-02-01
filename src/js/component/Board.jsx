@@ -44,17 +44,32 @@ const Board = () => {
 		//Modificar y de estados
 		arr_states[x_position][y_position] = color;
 		console.log(`Estado del juego: ${arr_states}`);
-		//Evalua si el jugador a ganado
 
 		//Todos los elementos de una fila en un array son iguales al primero de la fila
 		const allEqualForRow = (arr, iRow) => {
+			//Input array nxn
 			var rArr = arr[iRow];
 			return rArr.every((val) => val === rArr[0]);
 		};
-		//Todos los elementos de una fila de un array están definidos
+		const allEqualArrN = (arr) => {
+			//Input array n
+			return arr.every((val) => val === arr[0]);
+		};
+		//Todos los elementos de una fila de un array son strings
 		const allString = (arr, iRow) => {
+			//Input array nxn
 			var rArr = arr[iRow];
 			for (let value of rArr) {
+				if (typeof value !== "string") {
+					return false;
+				}
+			}
+			return true;
+		};
+		//Todos los elementos de una fila de un array son strings
+		const allStringArrN = (arr) => {
+			//Input array nxn
+			for (let value of arr) {
 				if (typeof value !== "string") {
 					return false;
 				}
@@ -126,7 +141,11 @@ const Board = () => {
 		);
 		//Comprobación diagonal principal
 		const isCompletePrincipalDiagonal = (arr) => {
-			return allEqualForRow(principalDiagonalArr(arr));
+			const pricipalDiagonal = principalDiagonalArr(arr);
+			return (
+				allEqualArrN(pricipalDiagonal) &&
+				allStringArrN(pricipalDiagonal)
+			);
 		};
 
 		//Diagonal secundaria
@@ -142,9 +161,18 @@ const Board = () => {
 		console.log(
 			`Diagonal secondary array: ${secondaryDiagonalArr(arr_states)}`
 		);
+		console.log(
+			`Diagonal secondary array: ${allStringArrN(
+				secondaryDiagonalArr(arr_states)
+			)}`
+		);
 		//Comprobación diagonal secundaria
 		const isCompleteSecondaryDiagonal = (arr) => {
-			return allEqualForRow(secondaryDiagonalArr(arr));
+			const secondaryDiagonal = secondaryDiagonalArr(arr);
+			return (
+				allEqualArrN(secondaryDiagonal) &&
+				allStringArrN(secondaryDiagonal)
+			);
 		};
 
 		//Evaluación de las comprobaciones
